@@ -1,5 +1,5 @@
-var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", 
-"m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 var wins = 0;
 var losses = 0;
@@ -9,27 +9,38 @@ var guessesMadeVar = [];
 var answer = "";
 
 
-$("#winDisplay").html("Wins: " + wins);
+
 $("#lossDisplay").html("Losses: " + losses);
-$("#lastGuess").html("Last Guess: " + guess);
-$("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
-$("#guessesMade").html("Guesses Made: " + guessesMadeVar);
 
-answer = letters[Math.floor(Math.random() * letters.length)];
 
-document.onkeyup = function(event) {
-    guess = event.key;
-    guessesMade.push(guess);
-    guessesLeft--;
+
+function gameStart() {
+    answer = letters[Math.floor(Math.random() * letters.length)];
+    console.log(answer);
+    guessesLeftVar = 9;
+    $("#lastGuess").html("Last Guess: ");
+    $("#guessesMade").html("Guesses Made: ");
 }
 
-if (guess === answer){
-    wins++;
-    guessesLeft = 9;
-}
+gameStart();
 
-if (guessesLeft === 0){
+document.onkeyup = function (event) {
+    guess = String.fromCharCode(event.which).toLowerCase();
+    console.log(guess);
 
+    if (guess === answer) {
+        wins++
+        $("#winDisplay").html("Wins: " + wins);
+        gameStart();
+    }
+
+
+
+    if (guess !== answer) {
+        guessesMadeVar.push(guess);
+        guessesLeft--;
+        $("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
+    }
 }
 // reset gamestate
 // var newGameState = function(){

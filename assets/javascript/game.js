@@ -3,14 +3,10 @@ var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 
 var wins = 0;
 var losses = 0;
-var guessesLeftVar = 9;
+var guessesLeftVar;
 var guess = "";
 var guessesMadeVar = [];
 var answer = "";
-
-
-
-$("#lossDisplay").html("Losses: " + losses);
 
 
 
@@ -18,35 +14,38 @@ function gameStart() {
     answer = letters[Math.floor(Math.random() * letters.length)];
     console.log(answer);
     guessesLeftVar = 9;
+    $("#winDisplay").html("Wins: " + wins);
+    $("#lossDisplay").html("Losses: " + losses);
+    $("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
     $("#lastGuess").html("Last Guess: ");
     $("#guessesMade").html("Guesses Made: ");
 }
 
 gameStart();
+console.log(guessesLeftVar);
+
 
 document.onkeyup = function (event) {
     guess = String.fromCharCode(event.which).toLowerCase();
     console.log(guess);
 
     if (guess === answer) {
-        wins++
+        wins++;
         $("#winDisplay").html("Wins: " + wins);
         gameStart();
+        alert("You Win!");
     }
-
-
 
     if (guess !== answer) {
-        guessesMadeVar.push(guess);
-        guessesLeft--;
+        guessesMadeVar.push(" " + guess);
+        $("#guessesMade").html("Guesses Made: " + guessesMadeVar)
+        guessesLeftVar--;
         $("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
     }
+    if (guessesLeftVar === 0) {
+        losses++;
+        $("#lossDisplay").html("Losses: " + losses);
+        gameStart();
+        alert("You Lose");
+    }
 }
-// reset gamestate
-// var newGameState = function(){
-//     guessesLeft = 9;
-//     guessesMade = [];
-//     newAnswer = function(){
-//         (answer = letters[Math.floor(Math.random() * letters.length)]
-//         )}
-// }

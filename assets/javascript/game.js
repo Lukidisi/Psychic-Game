@@ -3,29 +3,39 @@ var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 
 var wins = 0;
 var losses = 0;
-var guessesLeft = 9;
+var guessesLeftVar = 9;
 var guess = "";
-var guessesMade = [];
+var guessesMadeVar = [];
 var answer = "";
 
+
+$("#winDisplay").html("Wins: " + wins);
+$("#lossDisplay").html("Losses: " + losses);
+$("#lastGuess").html("Last Guess: " + guess);
+$("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
+$("#guessesMade").html("Guesses Made: " + guessesMadeVar);
 
 answer = letters[Math.floor(Math.random() * letters.length)];
 
 document.onkeyup = function(event) {
     guess = event.key;
-    document.$("#lastGuess").append(guess);
+    guessesMade.push(guess);
     guessesLeft--;
 }
 
 if (guess === answer){
-    win++;
-    
+    wins++;
+    guessesLeft = 9;
 }
 
-// reset gamestate
-var newGameState = function(){
-    guessesLeft = 9;
-    guessesMade = [];
-    newAnswer = function
-        answer = letters[Math.floor(Math.random() * letters.length)];
+if (guessesLeft === 0){
+
 }
+// reset gamestate
+// var newGameState = function(){
+//     guessesLeft = 9;
+//     guessesMade = [];
+//     newAnswer = function(){
+//         (answer = letters[Math.floor(Math.random() * letters.length)]
+//         )}
+// }

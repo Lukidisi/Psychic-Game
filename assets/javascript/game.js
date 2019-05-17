@@ -14,6 +14,8 @@ function gameStart() {
     answer = letters[Math.floor(Math.random() * letters.length)];
     console.log(answer);
     guessesLeftVar = 9;
+    guessesMadeVar = [];
+    guess = "";
     $("#winDisplay").html("Wins: " + wins);
     $("#lossDisplay").html("Losses: " + losses);
     $("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
@@ -36,11 +38,12 @@ document.onkeyup = function (event) {
         alert("You Win!");
     }
 
-    if (guess !== answer) {
+    if (guess !== answer && guess !== "") {
         guessesMadeVar.push(" " + guess);
-        $("#guessesMade").html("Guesses Made: " + guessesMadeVar)
+        $("#guessesMade").html("Guesses Made: " + guessesMadeVar);
         guessesLeftVar--;
         $("#guessesLeft").html("Guesses Left: " + guessesLeftVar);
+        $("#lastGuess").html("Last Guess: " + guess);
     }
     if (guessesLeftVar === 0) {
         losses++;
